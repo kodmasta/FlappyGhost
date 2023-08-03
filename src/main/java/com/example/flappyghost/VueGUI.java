@@ -34,18 +34,18 @@ public class VueGUI extends Application {
     private Canvas canvas = new Canvas();
     private ImageView bg1;
     private ImageView bg2;
-    private Image bgImg = new Image(getClass().getResourceAsStream("fichiersFH/bg.png"));
+    private Image bgImg = new Image("file:fichiersFH/bg.png");
     //c'est pas le filepath, mais le classpath. fichiersFH est dans "target" et non "src"
     private ImageView background;
     private ImageView background2;
     private Entity ghost;
     private LinkedList<Entity> entities = new LinkedList<Entity>();
-    private Image ghostPic = new Image(getClass().getResourceAsStream("fichiersFH/ghost.png"));
+    private Image ghostPic = new Image("file:fichiersFH/ghost.png");
     boolean entitySkin = true;
 
     @Override
     public void start(Stage stage) throws Exception {
-
+        System.out.println(getClass().getName().toString());
         int score = 0;
         double bgSpeed = 12;
         //bgSpeed c'est la vitesse que le bg scroll
@@ -170,7 +170,7 @@ public class VueGUI extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        System.out.println(root.getChildren());
+
     }
 
     public static void main(String[] args) {
