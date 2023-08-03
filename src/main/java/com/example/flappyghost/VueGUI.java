@@ -12,7 +12,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.geometry.Orientation;
@@ -21,7 +20,6 @@ import javafx.util.Duration;
 import javafx.application.Platform;
 
 import java.util.LinkedList;
-import java.util.Stack;
 
 public class VueGUI extends Application {
     public static final double WIDTH = 640, HEIGHT = 440, flapStrength = -300;
@@ -107,7 +105,6 @@ public class VueGUI extends Application {
         scene.setOnMouseClicked((event) -> {
             canvas.requestFocus();
         });
-
 
         ghost = new Ghost(WIDTH/2,HEIGHT/2);
         entities.add(ghost); //ghost est tjrs le premier entity dans le linkedList entities6
