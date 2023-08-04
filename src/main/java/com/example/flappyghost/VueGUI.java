@@ -128,11 +128,12 @@ public class VueGUI extends Application {
                 double deltaTime = (now - lastTime) * 1e-9;
                 context.clearRect(0, 0, WIDTH, HEIGHT);
 
+                Ghost ghost = (Ghost) entities.get(0);
                 for (int i = 0; i < entities.size(); i++) {
                     Entity e = entities.get(i);
                     e.move(deltaTime);
                     for (int j = i + 1; j < entities.size(); j++) {
-                        e.obstacleCollided(entities.get(j));
+                        ghost.obstacleCollided(entities.get(j));
                     }
                     e.draw(context, debugMode);
                 }
