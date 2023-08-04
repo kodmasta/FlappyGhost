@@ -1,11 +1,12 @@
 package com.example.flappyghost;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 
 public class Ghost extends Entity {
     protected double ay;
-    public Ghost(double x, double y) {
-        super(x, y, 30 , Color.BLACK);
+    public Ghost(double x, double y, Image skin) {
+        super(x, y, 30 , Color.BLACK, skin);
         ay = 500;
     }
     public void move(double dt) {

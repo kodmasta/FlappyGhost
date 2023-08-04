@@ -40,8 +40,7 @@ public class VueGUI extends Application {
     private ImageView background2;
     private Entity ghost;
     private LinkedList<Entity> entities = new LinkedList<Entity>();
-    private Image ghostPic = new Image("file:fichiersFH/ghost.png");
-    boolean entitySkin = true;
+    boolean debugMode = false;
 
     @Override
     public void start(Stage stage) throws Exception {
@@ -106,7 +105,7 @@ public class VueGUI extends Application {
             canvas.requestFocus();
         });
 
-        ghost = new Ghost(WIDTH/2,HEIGHT/2);
+        ghost = new Ghost(WIDTH/2,HEIGHT/2, new Image("file:fichiersFH/ghost.png"));
         entities.add(ghost); //ghost est tjrs le premier entity dans le linkedList entities6
 
         //space bar jump feature
@@ -135,7 +134,7 @@ public class VueGUI extends Application {
                     for (int j = i + 1; j < entities.size(); j++) {
                         e.obstacleCollided(entities.get(j));
                     }
-                    e.draw(context, entitySkin, ghostPic);
+                    e.draw(context, debugMode);
                 }
                 lastTime = now;
             }
@@ -157,10 +156,10 @@ public class VueGUI extends Application {
         debugCheckBox.setIndeterminate(false);
         debugCheckBox.setOnAction((event) -> {
             if(debugCheckBox.isSelected()) {
-                this.entitySkin = false;
+                this.debugMode = true;
             }
             else {
-                this.entitySkin = true;
+                this.debugMode = false;
             }
 
         });

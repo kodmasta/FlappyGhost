@@ -7,13 +7,14 @@ public abstract class Entity {
     protected double x, y;
     protected double rayon;
     protected double vx, vy;
-
+    protected Image skin;
     protected Color color;
-    public Entity(double x, double y, double r, Color c) {
+    public Entity(double x, double y, double r, Color c, Image skin) {
         this.x = x;
         this.y = y;
         this.rayon = r;
         this.color = c;
+        this.skin = skin;
     }
     public double getX() {
         return x;
@@ -39,13 +40,14 @@ public abstract class Entity {
         if (this.intersects(other))
             restartGame();
     }
-    public void draw(GraphicsContext context,boolean entitySkin, Image ghostPic) {
+    public void draw(GraphicsContext context,boolean debugMode) {
         context.setFill(this.color);
 
-        if(entitySkin)
-            context.drawImage(ghostPic, x-ghostPic.getWidth()/2, y-ghostPic.getWidth()/2);
-        else
+        if(debugMode)
             context.fillOval(this.x - this.rayon, this.y - this.rayon, 2 * this.rayon, 2 * this.rayon);
+        else
+            context.drawImage(skin, x-skin.getWidth()/2, y-skin.getWidth()/2);
+
     }
     public abstract void move(double dt);
     void flap(double v) {
