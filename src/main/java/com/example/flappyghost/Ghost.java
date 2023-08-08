@@ -5,9 +5,11 @@ import javafx.scene.paint.Color;
 
 public class Ghost extends Entity {
     protected double ay;
+    int score;
     public Ghost(double x, double y, Image skin) {
         super(x, y, 30 , Color.BLACK, skin);
         ay = 500;
+        this.score = 0;
     }
     public void move(double dt) {
         vy += dt * ay;
@@ -17,5 +19,14 @@ public class Ghost extends Entity {
         }
         y = Math.min(y, VueGUI.HEIGHT-25 - getH() / 2);
         y = Math.max(y, getH() / 2);
+    }
+    public void setAy(double newAy){
+        this.ay += newAy;
+    }
+    public int getScore(){
+        return this.score;
+    }
+    public void setScore(int score){
+        this.score = this.score + score;
     }
 }
