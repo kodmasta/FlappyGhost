@@ -43,7 +43,6 @@ public class VueGUI extends Application {
     double bgSpeed = 120;
     //bgSpeed c'est la vitesse que le bg scroll
     //12*10px/sec = 120px/sec. pour augmenter de 15px, on fait bgSpeed+=1.5
-
     public void restartGame(ParallelTransition parTrans){
         System.out.println("Le jeu a été redémarré");
         setBgSpeed(120);
@@ -58,7 +57,6 @@ public class VueGUI extends Application {
         setBgSpeed(getBgSpeed() + 15);
         parTrans.setRate(getBgSpeed());
         ghost.setAy(15);
-
     }
     public double getBgSpeed(){
         return this.bgSpeed;
@@ -143,16 +141,16 @@ public class VueGUI extends Application {
             private long lastTime = 0;
             double timeToSpawn = 0;
             boolean accelerationBool = false;
-
+            double deltaTime;
             @Override
             public void handle(long now) {
                 if (lastTime == 0) {
                     lastTime = now;
                     return;
                 }
-                double deltaTime = (now - lastTime) * 1e-9;
-                context.clearRect(0, 0, WIDTH, HEIGHT);
+                deltaTime = (now - lastTime) * 1e-9;
 
+                context.clearRect(0, 0, WIDTH, HEIGHT);
                 Ghost ghost = (Ghost) entityGhost;
                 for (int i = 0; i < entities.size(); i++) {
                     Entity e = entities.get(i);
@@ -164,7 +162,9 @@ public class VueGUI extends Application {
                             if (!debugMode){
                                 restartGame(parTrans);
                             }
-                        } else if (ghost.passObstacle(entities.get(j))) {
+                        }
+
+                        else if (ghost.passObstacle(entities.get(j))) {
                             entities.get(j).scored = true;
                             ghost.setScore(5);
                             scoreCounter.setText("Score: "+ghost.score);
@@ -172,6 +172,12 @@ public class VueGUI extends Application {
                                 accelerationBool = true;
                             }
                         }
+                        if (debugMode){
+                            if (!ghost.intersects(entities.get(j))){
+                                entities.get(j).setColor(Color.YELLOW);
+                            }
+                        }
+
                     }
                     e.draw(context, debugMode);
                 }
@@ -251,15 +257,12 @@ public class VueGUI extends Application {
 
         });
 
-
         stage.setTitle("Flappy Ghost");
         stage.getIcons().add(new Image("file:fichiersFH/ghost.png"));
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-
     }
-
     public static void main(String[] args) {
         launch();
     }
