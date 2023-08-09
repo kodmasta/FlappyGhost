@@ -63,7 +63,22 @@ public class VueGUI extends Application {
     }
     public void setBgSpeed(double newBgSpeed){
         this.bgSpeed = newBgSpeed;
+    }        
+    
+    long pauseStart = 0;
+    long pauseEnd = 0;
+    boolean unpause = false;
+
+    public void pausedTime(boolean start, long time){
+        if(start)
+            pauseStart = time;
+        else {
+            pauseEnd = time;
+            unpause = true;
+        }
     }
+
+    
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -148,6 +163,10 @@ public class VueGUI extends Application {
                     lastTime = now;
                     return;
                 }
+                if(unpause){
+                    unpause = false;
+                    lastTime += (pauseEnd-pauseStart);
+                }
                 deltaTime = (now - lastTime) * 1e-9;
 
                 context.clearRect(0, 0, WIDTH, HEIGHT);
@@ -221,12 +240,15 @@ public class VueGUI extends Application {
             }
         };
         timer.start();
-
+        
+        
+        
         pauseButton.setOnAction((event) -> {
             if (pauseButton.getText().equals("Pause")){
                 pauseButton.setText("Resume");
                 parTrans.pause();
                 timer.stop();
+                pausedTime(true, System.nanoTime());
                 Platform.runLater(()->{
                     canvas.requestFocus();
                 });
@@ -234,6 +256,7 @@ public class VueGUI extends Application {
             else {
                 pauseButton.setText("Pause");
                 parTrans.play();
+                pausedTime(false, System.nanoTime());
                 timer.start();
                 Platform.runLater(()->{
                     canvas.requestFocus();
