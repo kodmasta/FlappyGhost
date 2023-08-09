@@ -25,7 +25,6 @@ import static javafx.application.Platform.*;
 
 public class VueGUI extends Application {
     public static final double WIDTH = 640, HEIGHT = 440, flapStrength = -300;
-    public double CANVASHEIGHT;
 
     // Éléments graphiques
     private Button pauseButton;
