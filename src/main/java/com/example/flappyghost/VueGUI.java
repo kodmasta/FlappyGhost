@@ -19,6 +19,7 @@ import javafx.scene.canvas.*;
 import javafx.util.Duration;
 import static javafx.application.Platform.*;
 /**
+ * 10 - 08 - 2023
  * Voici notre version du jeu Flappy Ghost pour le travail pratique #2
  * Le projet a été décomposé en utilisant la méthode de décomposition MVC
  * Nous avons les modèles (classes Entity, Ghost, Obstacle, ObstacleQ, ObstacleSin)
